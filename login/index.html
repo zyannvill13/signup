@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log in</title>
+</head>
+<body>
+    <form id="form">
+        <h2>Sign Up</h2>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" id="txt_Name"></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" id="txt_Username"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" id="txt_Password"></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="signup()">SIGN UP</button></td>
+            </tr>
+        </table>
+
+        <h2>Log In</h2>
+        <table>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" id="txt_login_username"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" id="txt_login_password"></td>
+            </tr>
+            <tr>
+                <td><button type="button" onclick="login()">LOG IN</button></td>
+            </tr>
+        </table>
+    </form>
+    
+    <script>
+        let users = []; 
+
+        function signup() {
+            const name = document.getElementById("txt_Name").value;
+            const username = document.getElementById("txt_Username").value;
+            const password = document.getElementById("txt_Password").value;
+
+            if (username !== "" && password !== "" && name !== "") {
+                
+                const existingUser  = users.find(user => user.username === username);
+                if (existingUser ) {
+                    alert("Username already exists. Please choose a different username.");
+                } else {
+                    
+                    users.push({ name, username, password });
+                    alert("You have successfully signed up!");
+                    console.log("Name is: " + name);
+                    console.log("Username is: " + username);
+                    console.log("Password is: " + password);
+                }
+            } else {
+                alert("Please fill in all fields!");
+            }
+        }
+
+        function login() {
+            const username = document.getElementById("txt_login_username").value;
+            const password = document.getElementById("txt_login_password").value;
+
+            if (username !== "" && password !== "") {
+                
+                const user = users.find(user => user.username === username && user.password === password);
+                if (user) {
+                    alert("Login successful! Welcome, " + user.name);
+                } else {
+                    alert("Incorrect username or password. Please try again.");
+                }
+            } else {
+                alert("Please fill in all fields!");
+            }
+        }
+    </script>
+</body>
+</html>
